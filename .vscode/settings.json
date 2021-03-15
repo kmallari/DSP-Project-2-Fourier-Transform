@@ -1,0 +1,11 @@
+{
+    "editor.rulers": [70
+    ],
+    "files.associations": {
+        "complex": "cpp",
+        "cmath": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "iomanip": "cpp"
+    }
+}
