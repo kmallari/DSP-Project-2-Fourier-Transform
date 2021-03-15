@@ -38,7 +38,8 @@ bool isInt(string s, int &value)
   }
 }
 
-void userInput(double &LAF, double &HAF, double &SF, int &steps, int &type)
+void userInput(double &LAF, double &HAF, double &SF, int &steps,
+ int &type)
 {
   string temp;
   bool valid = 0;
@@ -89,7 +90,8 @@ void userInput(double &LAF, double &HAF, double &SF, int &steps, int &type)
   }
 }
 
-void FileWrite(vector<double> x, vector<complex<double>> y, vector<pair<double,double>> z, int type) //file write function
+void FileWrite(vector<double> x, vector<complex<double>> y,
+ vector<pair<double,double>> z, int type) //file write function
 {
   string FN;
   bool validName = true;
@@ -137,7 +139,8 @@ void FileWrite(vector<double> x, vector<complex<double>> y, vector<pair<double,d
     fileWrite << "Analog Frequency\tReal \tImaginary" << endl;
     for(int i=0; i<x.size(); i++)
     {
-      fileWrite << x[i] << '\t' << y[i].real() << '\t' << y[i].imag() << endl;
+      fileWrite << x[i] << "\t\t" << y[i].real() << "\t\t"
+       << y[i].imag() << endl;
     }
   }
   else if (type == 2)
@@ -145,7 +148,8 @@ void FileWrite(vector<double> x, vector<complex<double>> y, vector<pair<double,d
     fileWrite << "Analog Frequency\tMagnitude \tPhase" << endl;
     for(int i=0; i<x.size(); i++)
     {
-      fileWrite << x[i] << '\t' << z[i].first << '\t' << z[i].second << endl;
+      fileWrite << x[i] << "\t\t" << z[i].first << "\t\t"
+       << z[i].second << endl;
     }
   }
   fileWrite.close();
@@ -233,14 +237,6 @@ vector<double> extractSignals(int &signalsIndex)
   return signals;
 }
 
-void PrintData(vector<double> x)
-{
-  for (int i = 0; i < x.size(); i++)
-  {
-    cout << x[i] <<endl;
-  }
-}
-
 vector<double> computeSteps(double SampFreq, double LowAnalog,
 double HighAnalog, int steps)
 {
@@ -321,10 +317,11 @@ vector<double> computeCos(int SigSize, double DigFreq)
   return Cos;
 }
 
-vector<complex<double>> computeFourier(vector<double> Sig, vector<double> DigFreq, vector<double> AnalogFreq)
+vector<complex<double>> computeFourier(vector<double> Sig,
+ vector<double> DigFreq, vector<double> AnalogFreq)
 {
   vector<complex<double>> Fourier;
-  complex<double> temp = 0, sum;
+  complex<double> temp, sum;
   double samplesize = Sig.size();
   for(double z=0; z<DigFreq.size(); z++)
   {
@@ -336,41 +333,28 @@ vector<complex<double>> computeFourier(vector<double> Sig, vector<double> DigFre
       temp = Sig[n] * exp(-1i *DigFreq[z]*n);
       sum+=temp;
     }
-    cout << AnalogFreq[z] << "\t" << sum.real() << "\t";
-    cout << sum.imag() <<endl;
-    Fourier.push_back(sum);
   }
   return Fourier;
 }
 
-/*vector<pair<double,double>> computeFourierMagnitudePhasev2(vector<double> Sig, vector<complex<double>> Fourier, vector<double> AnalogFreq, vector<double> DigitalFreq)
-{
-  vector<pair<double,double>> FourierMagniPhase;
-  double magni, phase;
-
-  for(double n=0; n<Fourier.size(); n++)
-  {
-    magni = sqrt(Fourier[n].real()*Fourier[n].real() + Fourier[n].imag()*Fourier[n].imag());
-    phase = atan2(Fourier[n].real(),-1*Fourier[n].imag())*180/M_PI;
-    FourierMagniPhase.push_back(make_pair(magni,phase));
-    cout << AnalogFreq[n] << "\t \t" << FourierMagniPhase[n].first << "\t" << "\t";
-    cout << FourierMagniPhase[n].second <<endl;
-  }
-  return FourierMagniPhase;
-} */ //delete
-
-vector<pair<double,double>> computeFourierMagnitudePhase(vector<double> Sig, vector<double> DigFreq, vector<double> AnalogFreq)
+vector<pair<double,double>> computeFourierMagnitudePhase
+(vector<double> Sig, vector<double> DigFreq,
+ vector<double> AnalogFreq)
 {
   vector<pair<double,double>> Fourier;
   double magni, phase;
 
   for(double n=0; n<DigFreq.size(); n++)
   {
-    magni = computeMagnitude(computePhi(Sig, computeSin(Sig.size(),DigFreq[n])), computePhi(Sig, computeCos(Sig.size(),DigFreq[n])));
-    phase = computePhase(computePhi(Sig, computeSin(Sig.size(),DigFreq[n])), computePhi(Sig, computeCos(Sig.size(),DigFreq[n])));
+    magni = computeMagnitude(computePhi(Sig, 
+    computeSin(Sig.size(),DigFreq[n])), 
+    computePhi(Sig,computeCos(Sig.size(),DigFreq[n])));
+
+    phase = computePhase(computePhi(Sig, 
+    computeSin(Sig.size(),DigFreq[n])), 
+    computePhi(Sig, computeCos(Sig.size(),DigFreq[n])));
+
     Fourier.push_back(make_pair(magni,phase));
-    cout << AnalogFreq[n] << "\t \t" << Fourier[n].first << "\t" << "\t";
-    cout << Fourier[n].second <<endl;
   }
   return Fourier;
 }
