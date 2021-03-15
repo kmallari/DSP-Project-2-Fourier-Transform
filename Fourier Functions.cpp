@@ -55,7 +55,7 @@ void userInput(double &LAF, double &HAF, double &SF, int &steps,
     }
     cout << "Higher limit of Frequency to analyze: ";
     getline(cin, temp);
-    if(!isDouble(temp, HAF))
+    if(!isDouble(temp, HAF) || HAF < LAF)
     {
       cout << "Invalid! Please reinput!" <<endl;
       userInput(LAF, HAF, SF, steps, type);
@@ -333,6 +333,7 @@ vector<complex<double>> computeFourier(vector<double> Sig,
       temp = Sig[n] * exp(-1i *DigFreq[z]*n);
       sum+=temp;
     }
+    Fourier.push_back(temp);
   }
   return Fourier;
 }

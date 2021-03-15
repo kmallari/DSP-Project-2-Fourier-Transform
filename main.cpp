@@ -21,13 +21,13 @@ int main()
   vector<pair<double,double>> FourierMagPh;
 
   signal = extractSignals(index);
+
   userInput(LowAnalogFreq, HighAnalogFreq, SampFreq, steps, type);
   
   AnalogFreq = computeSteps(SampFreq, LowAnalogFreq, HighAnalogFreq,
    steps);
   DigitalFreq = computeDigitalFreq(AnalogFreq, SampFreq);
 
-  cout << endl;
   if (type == 1)
   {
     cout << "\nComplex Output File..." <<endl;
