@@ -80,7 +80,7 @@ void userInput(double &LAF, double &HAF, double &SF, int &steps,
     cout << "Choose between which type of Fourier transform to output"
     << "\n[1] Complex Form\n[2] Polar Form\n[3] Both\nAnswer: ";
     getline(cin, temp);
-    if(!isInt(temp, type) || (type < 1 && type > 3))
+    if(!isInt(temp, type) || type < 1 || type > 3)
     {
       cout << "Invalid! Please reinput!" <<endl;
       userInput(LAF, HAF, SF, steps, type);
