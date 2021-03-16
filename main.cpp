@@ -48,9 +48,9 @@ int main()
      AnalogFreq);
     
     cout << "\nComplex Output File..." <<endl;
-    FileWrite(AnalogFreq, FourierCmplx, FourierMagPh, type-1);
-    cout << "\nMagnitude Phase Output File..." <<endl;
     FileWrite(AnalogFreq, FourierCmplx, FourierMagPh, type-2);
+    cout << "\nMagnitude Phase Output File..." <<endl;
+    FileWrite(AnalogFreq, FourierCmplx, FourierMagPh, type-1);
   }
 }
 
