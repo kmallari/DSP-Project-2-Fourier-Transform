@@ -71,7 +71,7 @@ void userInput(double &LAF, double &HAF, double &SF, int &steps,
     }
     cout << "Steps to take: ";
     getline(cin, temp);
-    if(!isInt(temp, steps))
+    if(!isInt(temp, steps) || steps <= 0)
     {
       cout << "Invalid! Please reinput!" <<endl;
       userInput(LAF, HAF, SF, steps, type);
