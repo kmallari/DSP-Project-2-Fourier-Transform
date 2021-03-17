@@ -13,7 +13,6 @@ using namespace std;
 
 int main()
 {
-  cout << "Testing code" <<endl;
   vector<double> signal, AnalogFreq, DigitalFreq;
   double LowAnalogFreq, HighAnalogFreq, SampFreq;
   int steps, index, type; //remove index if di kailangan

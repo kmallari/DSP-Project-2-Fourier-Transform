@@ -294,7 +294,7 @@ double computeMagnitude(double sin, double cos)
 
 double computePhase(double sin, double cos)
 {
-  return ((atan2(cos, sin)*180)/M_PI);
+  return ((atan2(sin, cos)*180)/M_PI);
 }
 
 vector<double> computeSin(int SigSize, double DigFreq)
@@ -333,7 +333,7 @@ vector<complex<double>> computeFourier(vector<double> Sig,
       temp = Sig[n] * exp(-1i *DigFreq[z]*n);
       sum+=temp;
     }
-    Fourier.push_back(temp);
+    Fourier.push_back(sum);
   }
   return Fourier;
 }
@@ -351,7 +351,7 @@ vector<pair<double,double>> computeFourierMagnitudePhase
     computeSin(Sig.size(),DigFreq[n])), 
     computePhi(Sig,computeCos(Sig.size(),DigFreq[n])));
 
-    phase = computePhase(computePhi(Sig, 
+    phase = computePhase(-1*computePhi(Sig, 
     computeSin(Sig.size(),DigFreq[n])), 
     computePhi(Sig, computeCos(Sig.size(),DigFreq[n])));
 
